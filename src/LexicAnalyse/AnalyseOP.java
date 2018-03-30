@@ -1,11 +1,7 @@
+package LexicAnalyse;
 
-public class AnalyseOP implements AnalyseToken {
+public class AnalyseOP extends Analyse{
 	
-	public AnalyseOP() {
-	
-	}
-
-	@Override
 	public String analyse(String lexeme) {
 		if (lexeme.matches("\\=")) {
 			return "igual";

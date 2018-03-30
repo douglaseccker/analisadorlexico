@@ -1,3 +1,4 @@
+import LexicAnalyse.Token;
 
 public interface SymbolTableInterface {
 

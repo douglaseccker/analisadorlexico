@@ -1,15 +1,16 @@
+package LexicAnalyse;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class AnalyseReservedWorld implements AnalyseToken{
+public class AnalyseReservedWord extends Analyse{
 
 	// Estados do Automato Finito Deterministico
 	private Map<Integer, State> states;
 
-	// Construtor
-	public AnalyseReservedWorld() {
-
-		states = new HashMap<>();
+	//construtor
+	public AnalyseReservedWord() {
+		HashMap states = new HashMap<>();
 
 		State q0 = new State(false);
 		q0.addTransition('a', 1);

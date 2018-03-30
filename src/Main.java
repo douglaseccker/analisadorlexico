@@ -1,3 +1,4 @@
+import LexicAnalyse.*;
 
 public class Main {
 
@@ -23,7 +24,7 @@ public class Main {
 		
 		//reconhecedor de palavras reservadas
 		token.setLexeme("void");
-		AnalyseReservedWorld deterministic = new AnalyseReservedWorld();
+		AnalyseReservedWord deterministic = new AnalyseReservedWord();
 		value = deterministic.analyse(token.getLexeme());
 		System.out.println(token.getLexeme() +" "+ value);
 

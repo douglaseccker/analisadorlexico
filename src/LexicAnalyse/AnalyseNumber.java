@@ -1,13 +1,6 @@
+package LexicAnalyse;
 
-
-public class AnalyseNumber implements AnalyseToken {
-
-
-	public AnalyseNumber() {
-		
-	}
-
-	@Override
+public class AnalyseNumber extends Analyse{
 	public String analyse(String lexeme) {
 		boolean value = lexeme.matches("\\d{0,5}");
 		if (value == true) {

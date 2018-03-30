@@ -1,4 +1,4 @@
-
+package LexicAnalyse;
 
 import java.util.HashMap;
 import java.util.Map;
