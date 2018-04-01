@@ -1,13 +1,18 @@
 package LexicAnalyse;
 
-public class AnalyseVariable extends Analyse{
-	
-	public String analyse(String lexeme) {
-		boolean value = lexeme.matches("[A-Za-z0-9]*");
-		if (value == true) {
-			return "variable";
-		}
-		return "false";
-	}
+import LexicAnalyse.Contract.AnalyseContract;
 
+public class AnalyseVariable extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean value = lexeme.matches("^[A-Za-z]+[A-Za-z\\d]*");
+
+		if (value == true) {
+			this.tokenName = "variable";
+
+			return true;
+		}
+
+		return false;
+	}
 }

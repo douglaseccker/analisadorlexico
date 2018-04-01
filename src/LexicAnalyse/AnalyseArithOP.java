@@ -1,21 +1,32 @@
 package LexicAnalyse;
 
-public class AnalyseArithOP extends Analyse{
-	
-	public String analyse(String lexeme) {
+import LexicAnalyse.Contract.AnalyseContract;
+
+public class AnalyseArithOP extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("\\+\\+?")) {
-			return "Arith_Op";
+			this.tokenName = "Arith_Op";
+			this.tokenValue = "++";
 		} else if (lexeme.matches("\\-\\-?")) {
-			return "Arith_Op";
+			this.tokenName = "Arith_Op";
+			this.tokenValue = "--";
 		} else if (lexeme.matches("\\/")) {
-			return "Arith_Op";
+			this.tokenName = "Arith_Op";
+			this.tokenValue = "/";
 		} else if (lexeme.matches("\\*")) {
-			return "Arith_Op";
+			this.tokenName = "Arith_Op";
+			this.tokenValue = "*";
 		} else if (lexeme.matches("\\%")) {
-			return "Arith_Op";
+			this.tokenName = "Arith_Op";
+			this.tokenValue = "%";
+		} else {
+			found = false;
 		}
-		return "false";
+
+		return found;
 	}
-	
 
 }

@@ -1,13 +1,20 @@
 package LexicAnalyse;
 
-public class AnalyseIgnored extends Analyse {
+import LexicAnalyse.Contract.AnalyseContract;
 
-	public String analyse(String lexeme) {
+public class AnalyseIgnored extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("//.*$")) {
-			return "comment";
+			this.tokenName = "comment";
 		} else if (lexeme.matches("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)")) {
-			return "comment";
+			this.tokenName = "comment";
+		} else {
+			found = false;
 		}
-		return "false";
+
+		return found;
 	}
 }

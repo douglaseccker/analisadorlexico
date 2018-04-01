@@ -1,12 +1,18 @@
 package LexicAnalyse;
 
-public class AnalyseString extends Analyse {
+import LexicAnalyse.Contract.AnalyseContract;
 
-	public String analyse(String lexeme) {
+public class AnalyseString extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("(\".*\")")) {
-			return "string";
-		} 
+			this.tokenName = "string";
+		} else {
+			found = false;
+		}
 
-		return "false";
+		return found;
 	}
 }

@@ -3,7 +3,9 @@ package LexicAnalyse;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AnalyseReservedWord extends Analyse{
+import LexicAnalyse.Contract.AnalyseContract;
+
+public class AnalyseReservedWord extends AnalyseContract {
 
 	// Estados do Automato Finito Deterministico
 	private Map<Integer, State> states;
@@ -30,7 +32,7 @@ public class AnalyseReservedWord extends Analyse{
 		q0.addTransition('w', 104);
 		states.put(0, q0);
 
-		//A   
+		//A
 		State q1 = new State(false);
 		q1.addTransition('u', 2);
 		states.put(1, q1);
@@ -42,7 +44,6 @@ public class AnalyseReservedWord extends Analyse{
 		State q3 = new State(false);
 		q3.addTransition('o', 120);
 		states.put(3, q3);
-
 
 		//B
 		State q4 = new State(false);
@@ -79,7 +80,7 @@ public class AnalyseReservedWord extends Analyse{
 		State q11 = new State(false);
 		q11.addTransition('a', 12);
 		states.put(11, q11);
-		//char    
+		//char
 		State q12 = new State(false);
 		q12.addTransition('r', 120);
 		states.put(12, q12);
@@ -150,7 +151,7 @@ public class AnalyseReservedWord extends Analyse{
 		//double
 		State q28 = new State(false);
 		q28.addTransition('l', 29);
-		states.put(28, q28); 
+		states.put(28, q28);
 		//double
 		State q29 = new State(false);
 		q29.addTransition('e', 120);
@@ -169,15 +170,15 @@ public class AnalyseReservedWord extends Analyse{
 		//else
 		State q32 = new State(false);
 		q32.addTransition('e', 33);
-		states.put(32, q32);   
+		states.put(32, q32);
 		//enum
 		State q33 = new State(false);
 		q33.addTransition('u', 34);
-		states.put(33, q33); 
+		states.put(33, q33);
 		//enum
 		State q34 = new State(false);
 		q34.addTransition('m', 120);
-		states.put(34, q34); 
+		states.put(34, q34);
 		//extern
 		State q35 = new State(false);
 		q35.addTransition('t', 36);
@@ -203,24 +204,24 @@ public class AnalyseReservedWord extends Analyse{
 		//for
 		State q40 = new State(false);
 		q40.addTransition('r', 120);
-		states.put(40, q40); 
+		states.put(40, q40);
 		//float
 		State q41 = new State(false);
 		q41.addTransition('o', 42);
-		states.put(41, q41); 
+		states.put(41, q41);
 		//float
 		State q42 = new State(false);
 		q42.addTransition('a', 43);
-		states.put(42, q42); 
+		states.put(42, q42);
 		//float
 		State q43 = new State(false);
 		q43.addTransition('t', 120);
-		states.put(43, q43); 
+		states.put(43, q43);
 
 		//G
 		State q44 = new State(false);
 		q44.addTransition('o', 45);
-		states.put(44, q44); 
+		states.put(44, q44);
 		//goto
 		State q45 = new State(false);
 		q45.addTransition('t', 46);
@@ -473,7 +474,7 @@ public class AnalyseReservedWord extends Analyse{
 		q103.addTransition('e', 120);
 		states.put(103, q103);
 
-		//W    
+		//W
 		State q104 = new State(false);
 		q104.addTransition('h', 105);
 		states.put(104, q104);
@@ -490,7 +491,6 @@ public class AnalyseReservedWord extends Analyse{
 		q107.addTransition('e', 120);
 		states.put(107, q107);
 
-
 		//valida a expressao
 		State q120 = new State(true);
 		q120.addTransition('$', 120);
@@ -498,16 +498,23 @@ public class AnalyseReservedWord extends Analyse{
 	}
 
 	// Reconhecer a sentenca de entrada
-	public String analyse(String lexeme) {
+	public boolean analyse(String lexeme) {
+		boolean found = true;
 		String input = lexeme + "$";
 		Integer state = 0;
 		int length = input.length();
-		for(int symbol = 0; symbol < length; symbol++) {
+
+		for (int symbol = 0; symbol < length; symbol++) {
 			state = states.get(state).getTransition(input.charAt(symbol));
-			if(state == null) {
-				return "false";
+
+			if (state == null) {
+				found = false;
 			}
 		}
-		return "reserved_world";
+
+		this.tokenName = "reserved_world";
+		this.tokenValue = input;
+
+		return found;
 	}
 }

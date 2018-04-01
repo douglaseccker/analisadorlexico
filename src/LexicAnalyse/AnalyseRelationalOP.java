@@ -1,24 +1,29 @@
 package LexicAnalyse;
 
-public class AnalyseRelationalOP extends Analyse{
-	
-	public String analyse(String lexeme) {
+import LexicAnalyse.Contract.AnalyseContract;
+
+public class AnalyseRelationalOP extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("\\==")) {
-			return "igual";
+			this.tokenName = "igual";
 		} else if (lexeme.matches("\\<")) {
-			return "menor";
+			this.tokenName = "menor";
 		} else if (lexeme.matches("\\>")) {
-			return "maior";
+			this.tokenName = "maior";
 		} else if (lexeme.matches("\\<=")) {
-			return "menor_igual";
+			this.tokenName = "menor_igual";
 		} else if (lexeme.matches("\\>=")) {
-			return "maior_igual";
+			this.tokenName = "maior_igual";
 		} else if (lexeme.matches("\\!=")) {
-			return "diferente";
+			this.tokenName = "diferente";
+		} else {
+			found = false;
 		}
-		return "false";
+
+		return found;
 	}
-	
-	
 
 }
