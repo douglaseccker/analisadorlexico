@@ -1,6 +1,8 @@
+package LexicAnalyse.Contract;
+
 import LexicAnalyse.Token;
 
-public interface SymbolTableInterface {
+public interface SymbolTableContract {
 
 	public boolean addToken(Token token);
 	public boolean removeToken(int index);
