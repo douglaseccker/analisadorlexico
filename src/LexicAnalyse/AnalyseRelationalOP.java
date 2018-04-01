@@ -1,9 +1,9 @@
 package LexicAnalyse;
 
-public class AnalyseOP extends Analyse{
+public class AnalyseRelationalOP extends Analyse{
 	
 	public String analyse(String lexeme) {
-		if (lexeme.matches("\\=")) {
+		if (lexeme.matches("\\==")) {
 			return "igual";
 		} else if (lexeme.matches("\\<")) {
 			return "menor";
@@ -13,8 +13,8 @@ public class AnalyseOP extends Analyse{
 			return "menor_igual";
 		} else if (lexeme.matches("\\>=")) {
 			return "maior_igual";
-		} else if (lexeme.matches("\\<>")) {
-			return "maior";
+		} else if (lexeme.matches("\\!=")) {
+			return "diferente";
 		}
 		return "false";
 	}

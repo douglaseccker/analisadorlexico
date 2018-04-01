@@ -10,7 +10,7 @@ public class AnalyseReservedWord extends Analyse{
 
 	//construtor
 	public AnalyseReservedWord() {
-		HashMap states = new HashMap<>();
+		states = new HashMap<>();
 
 		State q0 = new State(false);
 		q0.addTransition('a', 1);
