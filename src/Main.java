@@ -49,20 +49,23 @@ public class Main {
 
 			for	(int i = 0; i < lines.length; i++)
 			{
-				Token token = new Token(lines[i].trim());
-
-				Iterator iter = list.getList().iterator();
-
-				while (iter.hasNext()) {
-					AnalyseContract next = (AnalyseContract) iter.next();
-
-					try {
-						if (next.analyse(token.getLexeme())) {
-							next.log();
-							//System.out.print(lines[i].trim());
+				String[] line = lines[i].trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");
+				for(String s : line) {
+					Token token = new Token(s);
+	
+					Iterator iter = list.getList().iterator();
+	
+					while (iter.hasNext()) {
+						AnalyseContract next = (AnalyseContract) iter.next();
+	
+						try {
+							if (next.analyse(token.getLexeme())) {
+								next.log();
+								//System.out.print(lines[i].trim());
+							}
+						} catch (Exception e) {
+							//TODO: handle exception
 						}
-					} catch (Exception e) {
-						//TODO: handle exception
 					}
 				}
 			}
