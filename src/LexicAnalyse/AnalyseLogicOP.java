@@ -1,16 +1,23 @@
 package LexicAnalyse;
 
-public class AnalyseLogicOP extends Analyse {
-	
-	public String analyse(String lexeme) {
+import LexicAnalyse.Contract.AnalyseContract;
+
+public class AnalyseLogicOP extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("\\&{2}")) {
-			return "e";
+			this.tokenName = "e";
 		} else if (lexeme.matches("\\|{2}")) {
-			return "ou";
+			this.tokenName = "ou";
 		} else if (lexeme.matches("\\!")) {
-			return "nao";
+			this.tokenName = "nao";
+		} else {
+			found = false;
 		}
-		return "false";
+
+		return found;
 	}
 
 }
