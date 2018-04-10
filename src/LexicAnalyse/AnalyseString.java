@@ -15,4 +15,11 @@ public class AnalyseString extends AnalyseContract {
 
 		return found;
 	}
+	
+	public String replaceSpaces(String lexeme, String separator) {
+		String ret;
+		
+		ret = lexeme.replaceAll(" ", separator);
+		return ret;
+	}
 }

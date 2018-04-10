@@ -17,4 +17,13 @@ public class AnalyseIgnored extends AnalyseContract {
 
 		return found;
 	}
+	
+	public String removeComments(String lexeme) {
+		String ret;
+		
+		ret = lexeme.replaceAll("//.*$", "");
+		ret = ret.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
+
+		return ret;
+	}
 }

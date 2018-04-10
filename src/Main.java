@@ -45,6 +45,9 @@ public class Main {
 			list.add(ignored);
 			list.add(caracter);
 
+			content = ignored.removeComments(content);
+//			content = string.replaceSpaces(content, "§");
+			
 			String lines[] = content.split("\\r?\\n");
 
 			for	(int i = 0; i < lines.length; i++)
