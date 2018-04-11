@@ -1,17 +1,27 @@
 package LexicAnalyse;
 
-public class AnalyseNumber extends Analyse{
-	public String analyse(String lexeme) {
+import LexicAnalyse.Contract.AnalyseContract;
+
+public class AnalyseNumber extends AnalyseContract {
+	public boolean analyse(String lexeme) {
+		boolean found = true;
 		boolean value = lexeme.matches("\\d{0,5}");
+
 		if (value == true) {
-			return "int";
+			this.tokenName = "reserved_word";
+			this.tokenValue = "int";
 		} else {
 			value = lexeme.matches("\\d+\\.\\d+");
+
 			if (value == true) {
-				return "double";
+				this.tokenName = "reserved_word";
+				this.tokenValue = "double";
+			} else {
+				found = false;
 			}
 		}
-		return "false";
+
+		return found;
 	}
 
 }

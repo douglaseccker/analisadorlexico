@@ -1,23 +1,30 @@
 package LexicAnalyse;
 
-public class AnalyseCaracter extends Analyse {
+import LexicAnalyse.Contract.AnalyseContract;
 
-	public String analyse(String lexeme) {
+public class AnalyseCaracter extends AnalyseContract {
+
+	public boolean analyse(String lexeme) {
+		boolean found = true;
+
 		if (lexeme.matches("\\=")) {
-			return "igual";
+			this.tokenName = "igual";
 		} else if (lexeme.matches("\\(")) {
-			return "l_paren";
+			this.tokenName = "l_paren";
 		} else if (lexeme.matches("\\)")) {
-			return "r_paren";
+			this.tokenName = "r_paren";
 		} else if (lexeme.matches("\\{")) {
-			return "l_bracket";
+			this.tokenName = "l_bracket";
 		} else if (lexeme.matches("\\}")) {
-			return "r_bracket";
+			this.tokenName = "r_bracket";
 		} else if (lexeme.matches("\\,")) {
-			return "comma";
+			this.tokenName = "comma";
 		} else if (lexeme.matches("\\;")) {
-			return "semicolon";
+			this.tokenName = "semicolon";
+		} else {
+			found = false;
 		}
-		return "false";
+
+		return found;
 	}
 }

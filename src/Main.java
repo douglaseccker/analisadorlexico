@@ -1,58 +1,81 @@
+import java.io.IOException;
+import java.util.Iterator;
+
 import LexicAnalyse.*;
+import LexicAnalyse.Contract.AnalyseContract;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// Token
-		Token token = new Token("1500.0");
+		try {
+			FileHandler fh = new FileHandler();
 
-		//teste para reconhecer numeros int ou double 
-		AnalyseNumber num = new AnalyseNumber();
-		String value = num.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
-		
-		//teste para reconhecer variaveis
+			String path = "code.txt";
 
-		token.setLexeme("variavel2");
-		
-		AnalyseVariable var = new AnalyseVariable();
-		value = var.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
-		
-		//tabela de simbolos
-		SymbolTable table = new SymbolTable(10);
-		table.addToken(token);
-		
-		//reconhecedor de palavras reservadas
-		token.setLexeme("if");
-		
-		AnalyseReservedWord deterministic = new AnalyseReservedWord();
-		value = deterministic.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() +" " + value);
+			String content;
 
-		//operadores relacionais
-		AnalyseRelationalOP relational = new AnalyseRelationalOP();
-		token.setLexeme("=");
-		value = relational.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
-		
-		//operadores aritmeticos
-		AnalyseArithOP arith = new AnalyseArithOP();
-		token.setLexeme("++");
-		value = arith.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
-		
-		//operadores logicos
-		AnalyseLogicOP logic = new AnalyseLogicOP();
-		token.setLexeme("||");
-		value = logic.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
-		
-		//demais caracteres
-		AnalyseCaracter caracter = new AnalyseCaracter();
-		token.setLexeme("=");
-		value = caracter.analyse(token.getLexeme());
-		System.out.println(token.getLexeme() + " " + value);
+			content = fh.read(path);
+
+			AnalyseList list = new AnalyseList();
+
+			AnalyseNumber num = new AnalyseNumber();
+			AnalyseVariable var = new AnalyseVariable();
+			//tabela de simbolos
+			AnalyseReservedWord deterministic = new AnalyseReservedWord();
+			//operadores relacionais
+			AnalyseRelationalOP relational = new AnalyseRelationalOP();
+			//operadores aritmeticos
+			AnalyseArithOP arith = new AnalyseArithOP();
+			//operadores logicos
+			AnalyseLogicOP logic = new AnalyseLogicOP();
+			//strings
+			AnalyseString string = new AnalyseString();
+			//coment√°rios
+			AnalyseIgnored ignored = new AnalyseIgnored();
+			//demais caracteres
+			AnalyseCaracter caracter = new AnalyseCaracter();
+
+			list.add(num);
+			list.add(var);
+			list.add(deterministic);
+			list.add(relational);
+			list.add(arith);
+			list.add(logic);
+			list.add(string);
+			list.add(ignored);
+			list.add(caracter);
+
+			content = ignored.removeComments(content);
+//			content = string.replaceSpaces(content, "ß");
+			
+			String lines[] = content.split("\\r?\\n");
+
+			for	(int i = 0; i < lines.length; i++)
+			{
+				String[] line = lines[i].trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");
+				for(String s : line) {
+					Token token = new Token(s);
+	
+					Iterator iter = list.getList().iterator();
+	
+					while (iter.hasNext()) {
+						AnalyseContract next = (AnalyseContract) iter.next();
+	
+						try {
+							if (next.analyse(token.getLexeme())) {
+								next.log();
+								//System.out.print(lines[i].trim());
+							}
+						} catch (Exception e) {
+							//TODO: handle exception
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-
 }

@@ -1,6 +1,9 @@
-import LexicAnalyse.Token;
+package LexicAnalyse;
 
-public class SymbolTable implements SymbolTableInterface {
+import LexicAnalyse.Token;
+import LexicAnalyse.Contract.SymbolTableContract;;
+
+public class SymbolTable implements SymbolTableContract {
 
 	private Token[] tokenTable;
 	private int count;
