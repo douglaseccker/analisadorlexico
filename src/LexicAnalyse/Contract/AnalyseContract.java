@@ -4,7 +4,7 @@ public abstract class AnalyseContract {
 	public String tokenName = "";
 	public String tokenValue = "";
 
-	public abstract boolean analyse(String lexeme);
+	public abstract boolean analyse(String lexeme, String next);
 
 	public void log()
 	{

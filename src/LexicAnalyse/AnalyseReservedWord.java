@@ -512,9 +512,9 @@ public class AnalyseReservedWord extends AnalyseContract {
 	}
 
 	// Reconhecer a sentenca de entrada
-	public boolean analyse(String lexeme) {
+	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
-		String input = lexeme + "$";
+		String input = lexeme;
 		Integer state = 0;
 		int length = input.length();
 
@@ -526,7 +526,7 @@ public class AnalyseReservedWord extends AnalyseContract {
 			}
 		}
 
-		this.tokenName = "reserved_world";
+		this.tokenName = "reserved_word";
 		this.tokenValue = input;
 
 		return found;

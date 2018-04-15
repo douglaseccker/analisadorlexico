@@ -39,8 +39,8 @@ public class Main {
 			PlusCaractere addCaracter = new PlusCaractere();
 
 			list.add(num);
-			list.add(var);
 			list.add(deterministic);
+			list.add(var);
 			list.add(relational);
 			list.add(arith);
 			list.add(logic);
@@ -55,28 +55,41 @@ public class Main {
 			for (int j =0; j < lines.length; j++) {
 				lines[j] = addCaracter.addCaracter(lines[j]);
 				//System.out.println(lines[j]);
-			}			
+			}
+			
+			TokenList tokens = new TokenList();
 
 			for	(int i = 0; i < lines.length; i++)
 			{
-				//String[] line = lines[i].trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");
 				String[] line = lines[i].split("(\\$)");
+				int column = 0;
 				for(String s : line) {
-					Token token = new Token(s);
+					if(!s.equals("")) {
+						Token token = new Token(s);
+		
+						Iterator iter = list.getList().iterator();
+		
+						while (iter.hasNext()) {
+							AnalyseContract next = (AnalyseContract) iter.next();
+		
+							try {
+								if (next.analyse(token.getLexeme(), line[(column+1)])) {
+									token.setPattern(next.tokenValue);
+									token.setLine(i);
+									token.setColum(column);
+									
+									tokens.add(token);
 	
-					Iterator iter = list.getList().iterator();
-	
-					while (iter.hasNext()) {
-						AnalyseContract next = (AnalyseContract) iter.next();
-	
-						try {
-							if (next.analyse(token.getLexeme())) {
-								next.log();
-								//System.out.print(lines[i].trim());
+									next.log();
+									//System.out.print(lines[i].trim());
+								}
+							} catch (Exception e) {
+								//TODO: handle exception
+								e.getStackTrace();
 							}
-						} catch (Exception e) {
-							//TODO: handle exception
 						}
+						
+						column++;
 					}
 				}
 			}

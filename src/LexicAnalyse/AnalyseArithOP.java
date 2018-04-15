@@ -4,7 +4,7 @@ import LexicAnalyse.Contract.AnalyseContract;
 
 public class AnalyseArithOP extends AnalyseContract {
 
-	public boolean analyse(String lexeme) {
+	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
 
 		if (lexeme.matches("\\+\\+?")) {
@@ -17,7 +17,7 @@ public class AnalyseArithOP extends AnalyseContract {
 			this.tokenName = "Arith_Op";
 			this.tokenValue = "/";
 		} else if (lexeme.matches("\\*")) {
-			this.tokenName = "Arith_Op";
+			this.tokenName = "Char_Asterisk";
 			this.tokenValue = "*";
 		} else if (lexeme.matches("\\%")) {
 			this.tokenName = "Arith_Op";

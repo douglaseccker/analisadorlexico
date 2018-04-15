@@ -4,7 +4,7 @@ import LexicAnalyse.Contract.AnalyseContract;
 
 public class AnalyseString extends AnalyseContract {
 
-	public boolean analyse(String lexeme) {
+	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
 
 		if (lexeme.matches("(\".*\")")) {
