@@ -17,10 +17,11 @@ public class Main {
 			content = fh.read(path);
 
 			AnalyseList list = new AnalyseList();
-
+			//numeros
 			AnalyseNumber num = new AnalyseNumber();
+			//variaveis
 			AnalyseVariable var = new AnalyseVariable();
-			//tabela de simbolos
+			//palavras reservadas
 			AnalyseReservedWord deterministic = new AnalyseReservedWord();
 			//operadores relacionais
 			AnalyseRelationalOP relational = new AnalyseRelationalOP();
@@ -34,6 +35,8 @@ public class Main {
 			AnalyseIgnored ignored = new AnalyseIgnored();
 			//demais caracteres
 			AnalyseCaracter caracter = new AnalyseCaracter();
+			//adiciona caracter
+			PlusCaractere addCaracter = new PlusCaractere();
 
 			list.add(num);
 			list.add(var);
@@ -46,13 +49,18 @@ public class Main {
 			list.add(caracter);
 
 			content = ignored.removeComments(content);
-//			content = string.replaceSpaces(content, "§");
 			
 			String lines[] = content.split("\\r?\\n");
+			
+			for (int j =0; j < lines.length; j++) {
+				lines[j] = addCaracter.addCaracter(lines[j]);
+				//System.out.println(lines[j]);
+			}			
 
 			for	(int i = 0; i < lines.length; i++)
 			{
-				String[] line = lines[i].trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");
+				//String[] line = lines[i].trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");
+				String[] line = lines[i].split("(\\$)");
 				for(String s : line) {
 					Token token = new Token(s);
 	
