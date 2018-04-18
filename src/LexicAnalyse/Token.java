@@ -5,7 +5,10 @@ public class Token {
 	private String lexeme;
 	private String pattern;
 	private int line;
-	private int colum;
+    private int colum;
+    private String name;
+    private String value;
+    private String lineFile; // temp
 
 	public Token(String lexeme) {
 		super();
@@ -44,4 +47,27 @@ public class Token {
 		this.colum = colum;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getLineFile() {
+		return lineFile;
+	}
+
+	public void setLineFile(String lineFile) {
+		this.lineFile = lineFile;
+	}
 }
