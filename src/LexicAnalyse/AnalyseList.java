@@ -3,14 +3,14 @@ package LexicAnalyse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnalyseList<AnalyseContract> {
-    private List<AnalyseContract> list = new ArrayList<AnalyseContract>();
+public class AnalyseList<T> {
+    private List<T> list = new ArrayList<T>();
 
-    public void add(AnalyseContract analyser) {
+    public void add(T analyser) {
         list.add(analyser);
     }
 
-    public List<AnalyseContract> getList()
+    public List<T> getList()
     {
         return this.list;
     }

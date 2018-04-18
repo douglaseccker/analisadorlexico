@@ -16,7 +16,7 @@ public class Main {
 
 			content = fh.read(path);
 
-			AnalyseList list = new AnalyseList();
+			AnalyseList<AnalyseContract> list = new AnalyseList<AnalyseContract>();
 			//numeros
 			AnalyseNumber num = new AnalyseNumber();
 			//variaveis
@@ -49,37 +49,37 @@ public class Main {
 			list.add(caracter);
 
 			content = ignored.removeComments(content);
-			
+
 			String lines[] = content.split("\\r?\\n");
-			
-			for (int j =0; j < lines.length; j++) {
+
+			for (int j = 0; j < lines.length; j++) {
 				lines[j] = addCaracter.addCaracter(lines[j]);
 				//System.out.println(lines[j]);
 			}
-			
-			TokenList tokens = new TokenList();
 
-			for	(int i = 0; i < lines.length; i++)
-			{
+			TokenList<Token> tokens = new TokenList<Token>();
+
+			for (int i = 0; i < lines.length; i++) {
 				String[] line = lines[i].split("(\\$)");
 				int column = 0;
-				for(String s : line) {
-					if(!s.equals("")) {
+
+				for (String s : line) {
+					if (!s.equals("")) {
 						Token token = new Token(s);
-		
-						Iterator iter = list.getList().iterator();
-		
+
+						Iterator<AnalyseContract> iter = list.getList().iterator();
+
 						while (iter.hasNext()) {
 							AnalyseContract next = (AnalyseContract) iter.next();
-		
+
 							try {
-								if (next.analyse(token.getLexeme(), line[(column+1)])) {
+								if (next.analyse(token.getLexeme(), line[(column + 1)])) {
 									token.setPattern(next.tokenValue);
 									token.setLine(i);
 									token.setColum(column);
-									
+
 									tokens.add(token);
-	
+
 									next.log();
 									//System.out.print(lines[i].trim());
 								}
@@ -88,7 +88,7 @@ public class Main {
 								e.getStackTrace();
 							}
 						}
-						
+
 						column++;
 					}
 				}
