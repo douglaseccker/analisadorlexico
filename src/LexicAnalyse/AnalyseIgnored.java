@@ -4,7 +4,7 @@ import LexicAnalyse.Contract.AnalyseContract;
 
 public class AnalyseIgnored extends AnalyseContract {
 
-	public boolean analyse(String lexeme) {
+	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
 
 		if (lexeme.matches("//.*$")) {
@@ -16,5 +16,14 @@ public class AnalyseIgnored extends AnalyseContract {
 		}
 
 		return found;
+	}
+	
+	public String removeComments(String lexeme) {
+		String ret;
+		
+		ret = lexeme.replaceAll("//.*$", "");
+		ret = ret.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
+
+		return ret;
 	}
 }

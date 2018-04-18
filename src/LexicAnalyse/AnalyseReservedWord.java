@@ -347,6 +347,7 @@ public class AnalyseReservedWord extends AnalyseContract {
 		//static
 		State q73 = new State(false);
 		q73.addTransition('a', 74);
+		q73.addTransition('r', 108);
 		states.put(73, q73);
 		//static
 		State q74 = new State(false);
@@ -376,6 +377,19 @@ public class AnalyseReservedWord extends AnalyseContract {
 		State q80 = new State(false);
 		q80.addTransition('h', 120);
 		states.put(80, q80);
+		//string
+		State q108 = new State(false);
+		q108.addTransition('i', 109);
+		states.put(108, q108);
+		//string
+		State q109 = new State(false);
+		q109.addTransition('n', 109);
+		states.put(109, q109);
+		//string
+		State q110 = new State(false);
+		q110.addTransition('g', 120);
+		states.put(110, q110);
+		
 
 		//T
 		State q81 = new State(false);
@@ -498,9 +512,9 @@ public class AnalyseReservedWord extends AnalyseContract {
 	}
 
 	// Reconhecer a sentenca de entrada
-	public boolean analyse(String lexeme) {
+	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
-		String input = lexeme + "$";
+		String input = lexeme;
 		Integer state = 0;
 		int length = input.length();
 
@@ -512,7 +526,7 @@ public class AnalyseReservedWord extends AnalyseContract {
 			}
 		}
 
-		this.tokenName = "reserved_world";
+		this.tokenName = "reserved_word";
 		this.tokenValue = input;
 
 		return found;
