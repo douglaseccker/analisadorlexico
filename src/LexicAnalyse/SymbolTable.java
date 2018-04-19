@@ -34,10 +34,15 @@ public class SymbolTable implements SymbolTableContract {
 
 	@Override
 	public Token getToken(int index) {
-		// TODO Auto-generated method stub
+		if (index < this.count) {
+			return this.tokenTable[index];
+		} else
 		return null;
 	}
 	
+	public int getCount() {
+		return this.count;
+	}
 	
 
 	
