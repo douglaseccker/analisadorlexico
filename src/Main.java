@@ -40,6 +40,10 @@ public class Main {
         AnalyseCaracter caracter = new AnalyseCaracter();
         //adiciona caracter
         PlusCaractere addCaracter = new PlusCaractere();
+        
+        Token test = new Token("int");
+        boolean valida = deterministic.analyse(test.getLexeme(), null);
+        System.out.println(valida);
 
         list.add(num);
         list.add(deterministic);

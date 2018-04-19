@@ -9,7 +9,7 @@ public class AnalyseCaracter extends AnalyseContract {
 
 		this.tokenValue = lexeme;
 		if (lexeme.matches("\\=")) {
-			this.tokenName = "igual";
+			this.tokenName = "att_op";
 		} else if (lexeme.matches("\\(")) {
 			this.tokenName = "l_paren";
 		} else if (lexeme.matches("\\)")) {

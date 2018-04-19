@@ -383,7 +383,7 @@ public class AnalyseReservedWord extends AnalyseContract {
         states.put(108, q108);
         //string
         State q109 = new State(false);
-        q109.addTransition('n', 109);
+        q109.addTransition('n', 110);
         states.put(109, q109);
         //string
         State q110 = new State(false);
@@ -519,19 +519,25 @@ public class AnalyseReservedWord extends AnalyseContract {
 
         for (int symbol = 0; symbol < length; symbol++) {
             if (states.get(state) == null) {
-                continue;
+            	found = false;
+            	return found;
             }
 
             state = states.get(state).getTransition(input.charAt(symbol));
 
             if (state == null) {
                 found = false;
+                return found;
             }
         }
 
-        this.tokenName = "reserved_word";
-        this.tokenValue = input;
-
+        if (state == 120) {
+        	this.tokenName = "reserved_word";
+        	this.tokenValue = input;
+        } else {
+        	found = false;
+        }
+        	
         return found;
     }
 }
