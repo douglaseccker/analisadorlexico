@@ -60,16 +60,17 @@ public class Main {
             //System.out.println(lines[j]);
         }
 
-        TokenList<Token> tokens = new TokenList<Token>();
-
+        SymbolTable tokenTable = new SymbolTable(300);
+        
         for (int lineIdx = 0, columnIdx = 0; lineIdx < lines.length; lineIdx++, columnIdx = 0) {
             String[] line = lines[lineIdx].split("(\\$)");
-
+         
             for (String column : line) {
                 if (column.isEmpty()) continue;
 
                 Token token = new Token(column);
                 token.setLine(lineIdx);
+                token.setColum(columnIdx++);
                 token.setLineFile(String.join(" ", line));
 
                 Iterator<AnalyseContract> it = list.getList().iterator();
@@ -79,12 +80,13 @@ public class Main {
 
                     try {
                         if (analyser.analyse(token.getLexeme(), line[(columnIdx + 1)])) {
-                            token.setPattern(analyser.tokenValue);
-                            token.setColum(columnIdx);
-                            token.setName(analyser.tokenName);
-                            token.setValue(analyser.tokenValue);
+                            //token.setPattern(analyser.tokenValue);
+                            //token.setColum(columnIdx);
+                            //token.setName(analyser.tokenName);
+                            //token.setValue(analyser.tokenValue);
+                        	token.setPattern(analyser.tokenName); //seta o tipo 
 
-                            tokens.add(token);
+                            tokenTable.addToken(token);  // adiciona o token na tabela de simbolos
 
                             //analyser.log();
 
@@ -93,8 +95,6 @@ public class Main {
                     } catch (Exception e) {
                     }
                 }
-
-                columnIdx++;
             }
         }
 
@@ -113,10 +113,13 @@ public class Main {
 
         int idx = 1;
 
-        for (Token token : tokens.getList()) {
+        for (int i = 0; i < tokenTable.getCount(); i++) {
             String ss = String.format(
-                "%s - %s - %s:%s | %s",
-                token.getLexeme(), token.getName(), token.getLine(), token.getColum(), token.getLineFile()
+                "%s - %s - %s:%s",
+                tokenTable.getToken(i).getLexeme(), 
+                tokenTable.getToken(i).getPattern(), 
+                tokenTable.getToken(i).getLine(), 
+                tokenTable.getToken(i).getColum() 
             );
 
             System.out.format(
