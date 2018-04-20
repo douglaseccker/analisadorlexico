@@ -8,17 +8,17 @@ public class AnalyseRelationalOP extends AnalyseContract {
 		boolean found = true;
 
 		if (lexeme.matches("\\==")) {
-			this.tokenName = "igual";
+			this.tokenName = "rel_op";
 		} else if (lexeme.matches("\\<")) {
-			this.tokenName = "menor";
+			this.tokenName = "rel_op";
 		} else if (lexeme.matches("\\>")) {
-			this.tokenName = "maior";
+			this.tokenName = "rel_op";
 		} else if (lexeme.matches("\\<=")) {
-			this.tokenName = "menor_igual";
+			this.tokenName = "rel_op";
 		} else if (lexeme.matches("\\>=")) {
-			this.tokenName = "maior_igual";
+			this.tokenName = "rel_op";
 		} else if (lexeme.matches("\\!=")) {
-			this.tokenName = "diferente";
+			this.tokenName = "rel_op";
 		} else {
 			found = false;
 		}
