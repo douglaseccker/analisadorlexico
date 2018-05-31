@@ -15,3 +15,4 @@ public class AnalyseList<T> {
         return this.list;
     }
 }
+

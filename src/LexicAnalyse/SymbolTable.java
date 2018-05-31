@@ -1,50 +1,56 @@
 package LexicAnalyse;
 
-import LexicAnalyse.Token;
-import LexicAnalyse.Contract.SymbolTableContract;;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SymbolTable implements SymbolTableContract {
+public class SymbolTable<T> {
 
-	private Token[] tokenTable;
-	private int count;
+	private List<T> tokenTable;
 
-	public SymbolTable(int size) {
-		this.tokenTable = new Token[size];
-		this.count = 0;
+	public SymbolTable() {
+		this.tokenTable = new ArrayList<T>();
 	}
 
-	@Override
-	public boolean addToken(Token token) {
-		if (count <tokenTable.length) {
-			tokenTable[count] = token;
-			count++;
-			return true;
-		}
-		return false;
+	public void add(T token) {
+        tokenTable.add(token);
+    }
+
+	public void removeToken(int index) {
+		tokenTable.remove(index);
 	}
 
-	@Override
-	public boolean removeToken(int index) {
-		if (tokenTable != null) {
-			tokenTable[index] = null;
-			return true;
-		} 
-		return false;
-	}
-
-	@Override
-	public Token getToken(int index) {
-		if (index < this.count) {
-			return this.tokenTable[index];
-		} else
-		return null;
-	}
+	public List<T> getList() {
+        return this.tokenTable;
+    }
 	
-	public int getCount() {
-		return this.count;
-	}
-	
+	public String toString() {
+    	
+    	String object = "+";
+        for (int i = 1; i < 60; i++) {
+            if (i == 15) {
+                object += "|";
+                continue;
+            }
+            object += "-";
+        }
+        object +="+\n";
 
-	
-	
+        object += "Entrada" + " : " + "Informacoes" + "\n";
+
+        for (int i = 0; i < tokenTable.size(); i++) {
+        	object += tokenTable.get(i).toString() + "\n";
+        }
+
+        object += "+";
+        for (int i = 1; i < 60; i++) {
+            if (i == 15) {
+            	object += "|";
+                continue;
+            }
+            object += "-";
+        }
+        object += "+";
+        
+        return object;
+    }	
 }

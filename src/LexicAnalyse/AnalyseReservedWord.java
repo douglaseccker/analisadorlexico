@@ -518,10 +518,6 @@ public class AnalyseReservedWord extends AnalyseContract {
         int length = input.length();
 
         for (int symbol = 0; symbol < length; symbol++) {
-            if (states.get(state) == null) {
-            	found = false;
-            	return found;
-            }
 
             state = states.get(state).getTransition(input.charAt(symbol));
 
@@ -531,7 +527,7 @@ public class AnalyseReservedWord extends AnalyseContract {
             }
         }
 
-        if (state == 120) {
+        if (states.get(state).isAccept()) {
         	this.tokenName = "reserved_word";
         	this.tokenValue = input;
         } else {
