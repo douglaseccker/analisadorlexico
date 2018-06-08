@@ -22,6 +22,10 @@ public class AnalyseCaracter extends AnalyseContract {
 			this.tokenName = "comma";
 		} else if (lexeme.matches("\\;")) {
 			this.tokenName = "semicolon";
+		} else if (lexeme.matches("\\[")) {
+			this.tokenName = "l_brace";
+		} else if (lexeme.matches("\\]")) {
+			this.tokenName = "r_brace";
 		} else {
 			found = false;
 		}

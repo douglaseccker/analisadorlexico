@@ -3,23 +3,33 @@ package LexicAnalyse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SymbolTable<T> {
+public class SymbolTable {
 
-	private List<T> tokenTable;
+	private List<Token> tokenTable;
 
 	public SymbolTable() {
-		this.tokenTable = new ArrayList<T>();
+		this.tokenTable = new ArrayList<Token>();
 	}
 
-	public void add(T token) {
+	public void add(Token token) {
         tokenTable.add(token);
     }
+	
+	public Token getToken(int i) {
+		Token object = this.tokenTable.get(i);
+		return object;
+	}
+	
+	public int getSize() {
+		int size = this.tokenTable.size();
+		return size;
+	}
 
 	public void removeToken(int index) {
 		tokenTable.remove(index);
 	}
 
-	public List<T> getList() {
+	public List<Token> getList() {
         return this.tokenTable;
     }
 	

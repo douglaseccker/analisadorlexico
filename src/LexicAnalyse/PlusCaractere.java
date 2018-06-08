@@ -11,7 +11,7 @@ public class PlusCaractere{
 		
 		// faz split e retira espacos em branco da entrada da funcao
 		String textsplit[] = new String[text.length()];
-		textsplit = text.trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)");;	
+		textsplit = text.trim().split("( )|(?<=\\()|(?=\\()|(?<=\\))|(?=\\))|(?<=;)|(?=;)|(?<=,)|(?=,)|(?<=\\{)|(?=\\})|(?<=\\*)|(?=\\*)|(?<=\\[)|(?<=\\])|(?=\\[)|(?=\\])");	
 		
 		// variavel para auxiliar laco a seguir
 		boolean searchString = false;

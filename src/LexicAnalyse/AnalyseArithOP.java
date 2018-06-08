@@ -7,12 +7,12 @@ public class AnalyseArithOP extends AnalyseContract {
 	public boolean analyse(String lexeme, String next) {
 		boolean found = true;
 
-		if (lexeme.matches("\\+\\+?")) {
+		if (lexeme.matches("\\+")) {
 			this.tokenName = "Arith_Op";
-			this.tokenValue = "++";
-		} else if (lexeme.matches("\\-\\-?")) {
+			this.tokenValue = "+";
+		} else if (lexeme.matches("\\-")) {
 			this.tokenName = "Arith_Op";
-			this.tokenValue = "--";
+			this.tokenValue = "-";
 		} else if (lexeme.matches("\\/")) {
 			this.tokenName = "Arith_Op";
 			this.tokenValue = "/";

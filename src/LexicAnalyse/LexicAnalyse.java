@@ -9,7 +9,7 @@ public class LexicAnalyse {
 	//lista de analisaddores
 	private AnalyseList<AnalyseContract> list;
 	//lista de tokens
-	private SymbolTable<Token> tokenTable;
+	private SymbolTable tokenTable;
     //numeros
     private AnalyseNumber num;  
     //variaveis
@@ -42,7 +42,7 @@ public class LexicAnalyse {
     	this.ignored = new AnalyseIgnored();
     	this.caracter = new AnalyseCaracter();
     	this.addCaracter = new PlusCaractere();
-    	this.tokenTable = new SymbolTable<Token>();
+    	this.tokenTable = new SymbolTable();
     	this.list = new AnalyseList<AnalyseContract>();
     	this.list.add(num);
     	this.list.add(deterministic);
