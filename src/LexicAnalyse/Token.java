@@ -70,4 +70,9 @@ public class Token {
 	public void setLineFile(String lineFile) {
 		this.lineFile = lineFile;
 	}
+	
+	public String toString() {
+		String object = getLexeme() + ": " + getPattern();
+		return object;	
+	}
 }

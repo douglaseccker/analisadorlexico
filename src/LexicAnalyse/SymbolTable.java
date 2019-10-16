@@ -1,50 +1,66 @@
 package LexicAnalyse;
 
-import LexicAnalyse.Token;
-import LexicAnalyse.Contract.SymbolTableContract;;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SymbolTable implements SymbolTableContract {
+public class SymbolTable {
 
-	private Token[] tokenTable;
-	private int count;
+	private List<Token> tokenTable;
 
-	public SymbolTable(int size) {
-		this.tokenTable = new Token[size];
-		this.count = 0;
+	public SymbolTable() {
+		this.tokenTable = new ArrayList<Token>();
 	}
 
-	@Override
-	public boolean addToken(Token token) {
-		if (count <tokenTable.length) {
-			tokenTable[count] = token;
-			count++;
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean removeToken(int index) {
-		if (tokenTable != null) {
-			tokenTable[index] = null;
-			return true;
-		} 
-		return false;
-	}
-
-	@Override
-	public Token getToken(int index) {
-		if (index < this.count) {
-			return this.tokenTable[index];
-		} else
-		return null;
+	public void add(Token token) {
+        tokenTable.add(token);
+    }
+	
+	public Token getToken(int i) {
+		Token object = this.tokenTable.get(i);
+		return object;
 	}
 	
-	public int getCount() {
-		return this.count;
+	public int getSize() {
+		int size = this.tokenTable.size();
+		return size;
 	}
-	
 
+	public void removeToken(int index) {
+		tokenTable.remove(index);
+	}
+
+	public List<Token> getList() {
+        return this.tokenTable;
+    }
 	
-	
+	public String toString() {
+    	
+    	String object = "+";
+        for (int i = 1; i < 60; i++) {
+            if (i == 15) {
+                object += "|";
+                continue;
+            }
+            object += "-";
+        }
+        object +="+\n";
+
+        object += "Entrada" + " : " + "Informacoes" + "\n";
+
+        for (int i = 0; i < tokenTable.size(); i++) {
+        	object += tokenTable.get(i).toString() + "\n";
+        }
+
+        object += "+";
+        for (int i = 1; i < 60; i++) {
+            if (i == 15) {
+            	object += "|";
+                continue;
+            }
+            object += "-";
+        }
+        object += "+";
+        
+        return object;
+    }	
 }

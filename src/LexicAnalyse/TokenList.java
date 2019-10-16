@@ -10,8 +10,7 @@ public class TokenList<T> {
         list.add(token);
     }
 
-    public List<T> getList()
-    {
+    public List<T> getList() {
         return this.list;
     }
 }
